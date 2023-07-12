@@ -11,7 +11,7 @@ $('.ai-form-block').on('keypress', function(e) {
                     $('.chat-container').append(newUserInput);
 
                     var airesloader = $('.chat__ai-response-loading').clone(); 
-                    airesloader.show(); 
+                    airesloader.css("display","block");
                     $('.chat-container').append(airesloader); 
                     
                     var apiendpoint = "https://chatai.ventive.app/api/inquiry?dataset=striketax.com";
@@ -33,6 +33,7 @@ $('.ai-form-block').on('keypress', function(e) {
                             if (!response.ok) {
                               throw new Error("HTTP status " + response.status);
                             }
+                            $('.chat-container .chat__ai-response-loading').remove();
                             newAiResponse = $('<div class="chat__ai-response-error">').text(response.status);
                             $('.chat-container').append(newAiResponse);
                             return response.json();
@@ -44,6 +45,7 @@ $('.ai-form-block').on('keypress', function(e) {
                             $('.chat-container').append(newAiResponse);
                     })
                     .catch(error => {
+                            $('.chat-container .chat__ai-response-loading').remove();
                             newAiResponse = $('<div class="chat__ai-response-error">').text(error);
                             $('.chat-container').append(newAiResponse);
                     });
