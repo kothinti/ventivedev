@@ -6,8 +6,13 @@ $('.ai-form-block').on('keypress', function(e) {
             
             if(userInput.length > 0){
                     
+                    var newAiResponse;
                     var newUserInput = $('<div class="chat__user-input">').text(userInput);
                     $('.chat-container').append(newUserInput);
+
+                    var airesloader = $('.chat__ai-response-loading').clone(); 
+                    airesloader.show(); 
+                    $('.chat-container').append(airesloader); 
                     
                     var apiendpoint = "https://chatai.ventive.app/api/inquiry?dataset=striketax.com";
                     var bearer = 'Bearer  qSaMJJXPlvtl52o5FaIeZJqHWSJnEqs25hy4N0sJ';
@@ -28,15 +33,20 @@ $('.ai-form-block').on('keypress', function(e) {
                             if (!response.ok) {
                               throw new Error("HTTP status " + response.status);
                             }
+                            newAiResponse = $('<div class="chat__ai-response-error">').text(response.status);
+                            $('.chat-container').append(newAiResponse);
                             return response.json();
                     })
                     .then(data => {
                             console.log(data);
-
-                            var newAiResponse = $('<div class="chat__ai-response">').text(data[0]);
+                            $('.chat-container .chat__ai-response-loading').remove();
+                            newAiResponse = $('<div class="chat__ai-response">').text(data[0]);
                             $('.chat-container').append(newAiResponse);
                     })
-                    .catch(error => console.error(error));
+                    .catch(error => {
+                            newAiResponse = $('<div class="chat__ai-response-error">').text(error);
+                            $('.chat-container').append(newAiResponse);
+                    });
                     return false;
             }
         }
