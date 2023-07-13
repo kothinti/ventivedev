@@ -4,6 +4,8 @@ $('.ai-form-block').on('keypress', function(e) {
             e.preventDefault();
             var userInput = $('.chat-input').val();
             
+            $('.chat-container').scrollTop($('.chat-container')[0].scrollHeight);
+
             if(userInput.length > 0){
                     
                     var newAiResponse;
