@@ -3,14 +3,13 @@ $('.ai-form-block').on('keypress', function(e) {
         if (keyCode === 13){ 
             e.preventDefault();
             var userInput = $('.chat-input').val();
-            
-            $('.chat-container').scrollTop($('.chat-container')[0].scrollHeight);
-
+        
             if(userInput.length > 0){
                     
                     var newAiResponse;
                     var newUserInput = $('<div class="chat__user-input">').text(userInput);
                     $('.chat-container').append(newUserInput);
+                    $('.chat-input').val("");
 
                     var airesloader = $('.chat__ai-response-loading').clone(); 
                     airesloader.css("display","block");
@@ -51,6 +50,8 @@ $('.ai-form-block').on('keypress', function(e) {
                             newAiResponse = $('<div class="chat__ai-response-error">').text(error);
                             $('.chat-container').append(newAiResponse);
                     });
+                    
+                    $('.chat-container').scrollTop($('.chat-container')[0].scrollHeight);
                     return false;
             }
         }
