@@ -26,7 +26,7 @@ $('.ai-form-block').on('keypress', function(e) {
                             method: 'POST', 
                             headers: {
                               'Authorization': bearer,
-                              'Content-Type': 'application/json'
+                              'Content-Type': 'text/plain'
                             },
                             body: JSON.stringify(data) 
                     })
