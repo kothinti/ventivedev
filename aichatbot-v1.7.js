@@ -19,7 +19,7 @@ $('.ai-form-block').on('keypress', function(e) {
                     var bearer = 'Bearer  qSaMJJXPlvtl52o5FaIeZJqHWSJnEqs25hy4N0sJ';
                     
                     var data = {
-                      question: userInput
+                      "question": userInput
                     };
                     
                     fetch(apiendpoint, {
